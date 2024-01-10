@@ -78,54 +78,66 @@
         img {
             height: 20px;
         }
+        
     </style>
     <script>
-        function convertLeiToEuro(event) {
-            event.preventDefault(); // Împiedică trimiterea formularului în mod tradițional
-            var leiAmount = document.getElementById("leiAmount").value;
+    function convertLeiToEuro(event) {
+        event.preventDefault();
+        var leiAmount = document.getElementById("leiAmount").value;
 
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById("result2").innerHTML = "Echivalentul in euro: " + xhr.responseText;
-                }
-            };
-            xhr.open("POST", "EuroLeiConverterServlet", true);
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr.send("leiAmount=" + leiAmount);
-        }
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // Set the result in the Euro textbox
+                document.getElementById("result2").value = xhr.responseText;
+            }
+        };
+        xhr.open("POST", "EuroLeiConverterServlet", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send("leiAmount=" + leiAmount);
+    }
 
-        function convertEuroToLei(event) {
-            event.preventDefault(); // Împiedică trimiterea formularului în mod tradițional
-            var euroAmount = document.getElementById("euroAmount").value;
+    function convertEuroToLei(event) {
+        event.preventDefault();
+        var euroAmount = document.getElementById("euroAmount").value;
 
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    document.getElementById("result1").innerHTML = "Echivalentul in lei: " + xhr.responseText;
-                }
-            };
-            xhr.open("POST", "LeiEuroConverterServlet", true);
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr.send("euroAmount=" + euroAmount);
-        }
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // Set the result in the Lei textbox
+                document.getElementById("result1").value = xhr.responseText;
+            }
+        };
+        xhr.open("POST", "LeiEuroConverterServlet", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send("euroAmount=" + euroAmount);
+    }
+
     </script>
 </head>
 <body>
     <h1>Convertor Euro-Lei si Lei-Euro</h1>
+    <h3>Lei - Euro</h3>
     <form>
         <img src="RO-flag.jpg">
         <label for="leiAmount">Lei:</label>
         <input type="text" id="leiAmount" name="leiAmount" required>
         <input type="submit" value="Converteste in Euro" class="button-13" onclick="convertLeiToEuro(event);">
-    </form>
-    <form action="EuroLeiConverterServlet" method="post">
+        <br>
         <img src="EE-flag.jpg">
         <label for="euroAmount">Euro:</label>
-        <input type="text" id="euroAmount" name="euroAmount" required>
-        <input type="submit" value="Converteste in Lei" class="button-13" onclick="convertEuroToLei(event);">
-    </form>
-    <div id="result1"></div>
-    <div id="result2"></div>
+		<input type="text" id="result2" readonly>    </form>
+	<h3>Euro - Lei</h3>
+    <form action="EuroLeiConverterServlet" method="post">
+	    <img src="EE-flag.jpg">
+	    <label for="euroAmount">Euro:</label>
+	    <input type="text" id="euroAmount" name="euroAmount" required>
+	    <input type="submit" value="Converteste in Lei" class="button-13" onclick="convertEuroToLei(event);">
+	    <br>
+	    <img src="RO-flag.jpg">
+	    <label>Lei:</label>
+	    <!-- Use an input element to display the result -->
+	    <input type="text" id="result1" readonly>
+	</form>
 </body>
 </html>

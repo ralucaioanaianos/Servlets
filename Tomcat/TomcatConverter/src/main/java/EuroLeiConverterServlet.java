@@ -13,8 +13,7 @@ public class EuroLeiConverterServlet extends HttpServlet {
             throws ServletException, IOException {
         String leiAmountStr = request.getParameter("leiAmount");
         double leiAmount = Double.parseDouble(leiAmountStr);
-        double convertedAmount = leiAmount * 0.2;
-
+        double convertedAmount = leiAmount * 0.20110272;
         response.setContentType("text/plain");
 
         response.getWriter().write(String.valueOf(convertedAmount));
