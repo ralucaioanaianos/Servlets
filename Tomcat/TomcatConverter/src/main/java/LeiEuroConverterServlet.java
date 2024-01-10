@@ -11,9 +11,11 @@ public class LeiEuroConverterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String euroAmountStr = request.getParameter("euroAmount");
+    	String euroAmountStr = request.getParameter("euroAmount");
         double euroAmount = Double.parseDouble(euroAmountStr);
-        double convertedAmount = euroAmount * 0.20;
-        response.getWriter().println("Echivalentul in lei: " + convertedAmount);
+        double convertedAmount = euroAmount * 4.75;
+        response.setContentType("text/plain");
+
+        response.getWriter().write(String.valueOf(convertedAmount));
     }
 }
