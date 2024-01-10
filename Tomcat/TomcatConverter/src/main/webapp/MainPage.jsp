@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <title>Conversie Monede</title>
     <style>
+    body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
         .button-13 {
             background-color: #fff;
             border: 1px solid #d5d9d9;
@@ -39,7 +47,7 @@
         }
 
         input {
-            background: #e3f2fd;
+            background: #EDF6FF;
             border: 0;
             outline: none;
             width: 80vw;
@@ -49,47 +57,38 @@
         }
 
         input:focus {
-            padding-bottom: 5px;
+            background: #DCE7F1;
         }
 
         .field {
             position: relative;
         }
 
-        .line {
-            width: 100%;
-            height: 3px;
-            position: absolute;
-            bottom: -8px;
-            background: #bdc3c7;
-        }
-
-        .line:after {
-            content: " ";
-            position: absolute;
-            float: right;
-            width: 100%;
-            height: 3px;
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-            background: #1abc9c;
-        }
-
+        
         img {
             height: 20px;
         }
         
     </style>
-    <script>
+<script>
     function convertLeiToEuro(event) {
         event.preventDefault();
         var leiAmount = document.getElementById("leiAmount").value;
+        var resultElement = document.getElementById("result2");
+        var errorMessageElement = document.getElementById("error2");
+
+        if (!leiAmount || isNaN(parseFloat(leiAmount))) {
+            errorMessageElement.innerHTML = "Please enter a valid number.";
+            resultElement.value = "";
+            return;
+        }
 
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 // Set the result in the Euro textbox
-                document.getElementById("result2").value = xhr.responseText;
+                resultElement.value = xhr.responseText;
+                errorMessageElement.innerHTML = "";
             }
         };
         xhr.open("POST", "EuroLeiConverterServlet", true);
@@ -100,12 +99,21 @@
     function convertEuroToLei(event) {
         event.preventDefault();
         var euroAmount = document.getElementById("euroAmount").value;
+        var resultElement = document.getElementById("result1");
+        var errorMessageElement = document.getElementById("error1");
+
+        if (!euroAmount || isNaN(parseFloat(euroAmount))) {
+            errorMessageElement.innerHTML = "Please enter a valid number.";
+            resultElement.value = "";
+            return;
+        }
 
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 // Set the result in the Lei textbox
-                document.getElementById("result1").value = xhr.responseText;
+                resultElement.value = xhr.responseText;
+                errorMessageElement.innerHTML = "";
             }
         };
         xhr.open("POST", "LeiEuroConverterServlet", true);
@@ -127,6 +135,7 @@
         <img src="EE-flag.jpg">
         <label for="euroAmount">Euro:</label>
 		<input type="text" id="result2" readonly>    </form>
+		<div id="error2" class="error-message"></div>
 	<h3>Euro - Lei</h3>
     <form action="EuroLeiConverterServlet" method="post">
 	    <img src="EE-flag.jpg">
@@ -138,6 +147,7 @@
 	    <label>Lei:</label>
 	    <!-- Use an input element to display the result -->
 	    <input type="text" id="result1" readonly>
+	    <div id="error1" class="error-message"></div>
 	</form>
 </body>
 </html>
