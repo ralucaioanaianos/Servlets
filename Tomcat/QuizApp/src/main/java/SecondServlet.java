@@ -12,10 +12,8 @@ import java.util.Map;
 @WebServlet("/SecondServer")
 public class SecondServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Retrieve points from the request attributes
         Map<String, Integer> pointsMap = (Map<String, Integer>) request.getAttribute("pointsMap");
         
-        // Calculate total points
         int totalPoints = calculateTotalPoints(pointsMap);
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
@@ -37,12 +35,9 @@ public class SecondServlet extends HttpServlet {
         out.println("<body>");
         out.println("<img src='confetti.gif' alt='Confetti' />");
         out.println("<h1>Felicitari! Ai obtinut " + totalPoints + " puncte!</h1>");
-
-        // Close PrintWriter
         out.close();
     }
 
-    // Calculate total points based on points for each question
     private int calculateTotalPoints(Map<String, Integer> pointsMap) {
         int totalPoints = 0;
         for (int points : pointsMap.values()) {
