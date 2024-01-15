@@ -29,4 +29,24 @@
     <servlet-name>EuroLeiConverterServlet</servlet-name>
     <url-pattern>/EuroLeiConverterServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DispatcherServlet</display-name>
+    <servlet-name>DispatcherServlet</servlet-name>
+    <servlet-class>DispatcherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DispatcherServlet</servlet-name>
+    <url-pattern>/DispatcherServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SecondServlet</display-name>
+    <servlet-name>SecondServlet</servlet-name>
+    <servlet-class>SecondServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SecondServlet</servlet-name>
+    <url-pattern>/SecondServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

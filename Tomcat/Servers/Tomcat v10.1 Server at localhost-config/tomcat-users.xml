@@ -33,7 +33,7 @@
 -->
 <!--
   <user username="admin" password="<must-be-changed>" roles="manager-gui"/>
-  <user username="robot" password="<must-be-changed>" roles="manager-script"/>
+  <user username="robot" password="1234567" roles="manager-script"/>
 -->
 <!--
   The sample user and role entries below are intended for use with the
