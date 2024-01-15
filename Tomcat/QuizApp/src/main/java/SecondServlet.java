@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
 @WebServlet("/SecondServer")
@@ -16,9 +17,17 @@ public class SecondServlet extends HttpServlet {
         
         // Calculate total points
         int totalPoints = calculateTotalPoints(pointsMap);
-        
-        // Send total points to the client
-        response.getWriter().write("Total Points: " + totalPoints);
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println("<html>");
+        out.println("<head><title>Quiz Result</title></head>");
+        out.println("<body>");
+        out.println("<h3>Felicitari! Ai obtinut " + totalPoints + " puncte!</h3>");
+        out.println("</body>");
+        out.println("</html>");
+
+        // Close PrintWriter
+        out.close();
     }
 
     // Calculate total points based on points for each question
